@@ -1,4 +1,4 @@
-{% extends 'base_layout2.html' %}
+{% extends 'base_layout.html' %}
 {% block head %}
 <style media="screen">
   .post-body{
@@ -8,29 +8,54 @@
   .post-date{
     font-size: 0.7em;
   }
-
 </style>
 {% endblock %}
 {% block content %}
-  <!-- <h2><a href="{% url 'accounts:my_profile' %}" class="myprofile">{{request.user}}</a></h2> -->
-  <!-- <h1 class="Recent">Recent Posts</h1> -->
-  <div class="posts">
-    {% for post in posts %}
-    <!-- #template tag for writing python code -->
-      <div class= "container">
-        <h2 ><a href="{% url 'accounts:profile'%}" class="post-user">{{post.author.username}}</a></h2>
-        <p class="post-body">{{post.body}}</p>
-        {% if post.thumb != 'download.jpg' %}
-          <img src="{{post.thumb.url}}"/>
-        {% endif %}
-        <!-- <p><a href="{%  url 'posts:timeline' %}" class="likes">Like</a></p> -->
-        <!-- <input type="button" -->
-        <p class="post-date">{{post.date}}</p>
-        <!-- <img src="{{ post.thumb }}"/> -->
-        <!-- #template tag for outputing data -->
-      </div>
-    {% endfor %}
-
+<div class="container">
+  <div class="col-md-8">
+    <h2><a href="{% url 'accounts:my_profile' %}" class="myprofile">{{request.user}}</a></h2>
+    <h1>Recent Posts</h1>
+    <div class="posts">
+      {% for post in posts %}
+      <!-- #template tag for writing python code -->
+        <div class= "container">
+          <h2 ><a href="{% url 'accounts:profile_with_pk' pk=post.author.pk %}" class="post-user">{{post.author.username}}</a></h2>
+          <p class="post-body">{{post.body}}</p>
+          {% if post.thumb != 'download.jpg' %}
+            <img src="{{post.thumb.url}}"/>
+          {% endif %}
+          <!-- <p><a href="{%  url 'posts:timeline' %}" class="likes">Like</a></p> -->
+          <!-- <input type="button" -->
+          <p class="post-date">{{post.date}}</p>
+          <!-- <img src="{{ post.thumb }}"/> -->
+          <!-- #template tag for outputing data -->
+        </div>
+      {% endfor %}
+    </div>
   </div>
+  <div class="col-md-4">
+    <h2>Other people</h2>
+    {% for user in users %}
+      <a href="{% url 'accounts:profile_with_pk' pk=user.pk %}">
+        <h3>{{ user.username }}</h3>
+      </a>
+      {% if not user in friends %}
+      <a href="{% url 'posts:change_friends' operation='add' pk=user.pk %}">
+        <button type="button" class="btn btn-success">Add Friend</button>
+      </a>
+      {% endif %}
+    {% endfor %}
+    <h2>Friends</h2>
+    {% for friend in friends %}
+      <a href="{% url 'accounts:profile_with_pk' pk=friend.pk %}">
+        <h3>{{ friend.username }}</h3>
+      </a>
+      <a href="{% url 'posts:change_friends' operation='remove' pk=friend.pk %}">
+        <button type="button" class="btn btn-danger">Remove Friend</button>
+      </a>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
+
