@@ -1,0 +1,36 @@
+{% extends 'base_layout2.html' %}
+{% block head %}
+<style media="screen">
+  .post-body{
+    margin-left: 40px;
+    font-size: 1.2em;
+  }
+  .post-date{
+    font-size: 0.7em;
+  }
+
+</style>
+{% endblock %}
+{% block content %}
+  <!-- <h2><a href="{% url 'accounts:my_profile' %}" class="myprofile">{{request.user}}</a></h2> -->
+  <!-- <h1 class="Recent">Recent Posts</h1> -->
+  <div class="posts">
+    {% for post in posts %}
+    <!-- #template tag for writing python code -->
+      <div class= "container">
+        <h2 ><a href="{% url 'accounts:profile'%}" class="post-user">{{post.author.username}}</a></h2>
+        <p class="post-body">{{post.body}}</p>
+        {% if post.thumb != 'download.jpg' %}
+          <img src="{{post.thumb.url}}"/>
+        {% endif %}
+        <!-- <p><a href="{%  url 'posts:timeline' %}" class="likes">Like</a></p> -->
+        <!-- <input type="button" -->
+        <p class="post-date">{{post.date}}</p>
+        <!-- <img src="{{ post.thumb }}"/> -->
+        <!-- #template tag for outputing data -->
+      </div>
+    {% endfor %}
+
+  </div>
+
+{% endblock %}
