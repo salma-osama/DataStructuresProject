@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Post
+from .models import Post , Friend
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .import forms
@@ -10,8 +10,12 @@ from django.contrib.auth.models import User
 def timeline(request):
     posts =Post.objects.all().order_by('date')
     user=request.user
-    arg={'myName':user}
-    return render(request,'posts/timeline.html',{'posts':posts})
+    users=User.objects.exclude(id=request.user.id)
+    friend=Friend.objects.get(current_user=request.user)
+    friends=friend.users.all()
+    #arg={'myName':user}
+    args={'posts':posts , 'users':users , 'friends':friends}
+    return render(request,'posts/timeline.html',args)
 
 # def user_profile(request,slug):
 #     return HttpResponse(slug)
@@ -35,3 +39,11 @@ def post_create(request):
 # def post_like(request):
 #     user=form.save()
 #     addLike(request,user)
+def change_friends(request,operation,pk):
+    new_friend=User.objects.get(pk=pk)
+    if operation == 'add':
+        Friend.make_friend(request.user,new_friend)
+    elif operation == 'remove':
+        Friend.lose_friend(request.user,new_friend)
+    return redirect('posts:timeline')
+
