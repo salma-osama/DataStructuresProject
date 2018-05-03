@@ -1,0 +1,44 @@
+body{
+    /* background-color: #0f121f; */
+    background-color: black;
+    background-image: url(starsjpg.jpg);
+    /* background-size: cover; */
+    background-repeat-y: no-repeat;
+    color: #fff;
+    /* color: black; */
+}
+.homepage h1{
+  max-width: 960px;
+  margin-top: 150px;
+  /* margin: 300px, 300px; */
+  text-align: center;
+  color:white;
+  font-size: 3em;
+}
+.homepage p{
+  max-width: 960px;
+  margin: 100px, 100px;
+  text-align: center;
+  color:white;
+  font-size: 2em;
+}
+.buttons
+{
+  max-width: 960px;
+  margin-left: 400px;
+}
+#btnlogin,#btnsignup{
+
+  background: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 20px;
+  border: 1px solid #6495ED;
+  text-decoration: none;
+  /* border: 1px solid #6495ED; */
+  border-radius: 4px;
+  padding: 10px;
+}
