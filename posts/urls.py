@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^profile/$', accounts_views.view_my_profile,name="my_profile"),
     # url(r'^(?P<slug>[\w-]+)/$',accounts_views.view_profile,name="profile"),
     # url(r'^like/$',views.post_like, name="like"),
+    url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$',views.change_friends,name="change_friends"),
 ]
