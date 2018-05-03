@@ -1,0 +1,15 @@
+{% extends 'base_layout2.html' %}
+
+{%block head %}
+<title> My profile</title>
+{% endblock %}
+
+{% block content %}
+    <h1>welcome to your own profile {{request.user}}</h1>
+{% endblock %}
+
+{% block bar %}
+<li><a href="{% url 'accounts:edit_my_profile' %}">Edit Profile</a></li>
+<li><a href="{% url 'accounts:edit_my_password' %}">Change Password</a></li>
+<li><a href="{% url 'accounts:about_me' %}">About Me</a></li>
+{% endblock %}

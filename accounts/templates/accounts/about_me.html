@@ -1,0 +1,23 @@
+{% extends 'base_layout2.html' %}
+
+{%block head %}
+<title>About me</title>
+{% endblock %}
+
+{% block content %}
+    <h2>your username: {{user}}</h2>
+    <h3>your first name: {{user.first_name}}</h3>
+    <h3>your last name: {{user.last_name}}</h3>
+    <h3>your email: {{user.email}}</h3>
+    <h3>your description: {{user.userprofile.description }}</h3>
+    <h3>your country: {{user.userprofile.country }}</h3>
+    <h3>your city: {{user.userprofile.city }}</h3>
+    <h3>your phone number: {{user.userprofile.phone }}</h3>
+    <img src="{{ user.userprofile.image.url }}" width="240">
+
+    <!-- <p><a href={% url 'accounts:edit_my_profile' %}>Edit my profile</a></p> -->
+{% endblock %}
+{% block bar %}
+<li><a href="{% url 'accounts:edit_my_profile' %}">Edit Profile</a></li>
+<li><a href="{% url 'accounts:edit_my_password' %}">Change Password</a></li>
+{% endblock %}
