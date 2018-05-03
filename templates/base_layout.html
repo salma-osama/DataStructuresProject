@@ -1,0 +1,51 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+
+   {% block head %}
+   <meta charset="utf-8">
+   <title>Timeline</title>
+   {% endblock %}
+   <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+   <link rel="stylesheet" href="{% static 'styles.css'%}">
+ </head>
+
+ <body>
+   <br>
+   <header class ="wrapper">
+     {% if user.is_authenticated %}
+      <h1><a href="{% url 'posts:timeline'%}" class="logo"><img src="download.png"/>projectlogo</a></h1>
+     {% else %}
+      <h1><a href="{% url 'home'%}" class="logo"><img src="download.png" />projectlogo</a></h1>
+     {% endif %}
+
+     <nav>
+       <!-- <div id="navbar" class="navbar-collapse collapse"> -->
+       <ul>
+         {% if user.is_authenticated %}
+           <li>
+             <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+               {% csrf_token %}
+               <button type="submit">Logout</button>
+             </form>
+           </li>
+           <li><a href="{% url 'posts:create'%}" class="create_post">Create Post</a></li>
+         {% else %}
+           <li>
+             <a href="{% url 'accounts:login' %}" class="login">Login</a></li>
+           <li>
+             <a href="{% url 'accounts:signup' %}" class="signup">Signup</a></li>
+         {% endif %}
+       </ul>
+
+     </nav>
+   </header>
+   <div class="wrapper">
+     {% block content %}
+     {% endblock %}
+   </div>
+
+ </body>
+ </html>

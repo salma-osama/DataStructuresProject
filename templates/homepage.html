@@ -1,0 +1,22 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Homepage</title>
+      <link rel="stylesheet" href="{% static 'homepagestyles.css'%}">
+  </head>
+  <body>
+    <h1><a href="{% url 'home'%}"><img src="#" />projectlogo</a></h1>
+    <div class="homepage">
+      <h1>projectname</h1>
+      <p> Welcome to projectname</p1>
+    </div>
+    <div class="buttons">
+    <a href="{% url 'accounts:login'%}" id="btnlogin">Login</a>
+    <a href="{% url 'accounts:signup'%}" id="btnsignup">Signup</a>
+  </div>
+
+  </body>
+</html>
