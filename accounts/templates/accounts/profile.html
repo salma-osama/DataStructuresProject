@@ -1,7 +1,26 @@
 {% extends 'base_layout2.html' %}
 {%block head %}
-<title>Profile</title>
+    <title>{{friend}}</title>
 {% endblock %}
 {% block content %}
-    <h1> hello {{myname}} </h1>
+    <div class="posts">
+      {% for post in posts %}
+      <!-- #template tag for writing python code -->
+        {% if friend == post.author.username %}
+          <div class= "container">
+            <h2 ><a href="{% url 'accounts:profile'%}" class="post-user">{{post.author.username}}</a></h2>
+            <p class="post-body">{{post.body}}</p>
+            {% if post.thumb != 'download.jpg' %}
+              <img src="{{post.thumb.url}}"/>
+            {% endif %}
+            <!-- <p><a href="{%  url 'posts:timeline' %}" class="likes">Like</a></p> -->
+            <!-- <input type="button" -->
+            <p class="post-date">{{post.date}}</p>
+            <!-- <img src="{{ post.thumb }}"/> -->
+            <!-- #template tag for outputing data -->
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
 {% endblock %}
