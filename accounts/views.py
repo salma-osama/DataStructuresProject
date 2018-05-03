@@ -40,17 +40,20 @@ def logout_view(request):
         return redirect('home')
     
 @login_required(login_url="/accounts/login/")
-def view_profile(request , pk=None):              
+def view_profile(request , pk=None, friend):              
     if pk:
         user = User.objects.get(pk=pk)
     else:
         user = request.user
-    args={'myname':user}
+    posts =Post.objects.all().order_by('date')
+
+    args={'user':request.user, 'posts':posts, 'friend':friend}
     return render(request,'accounts/profile.html',args)
 
 @login_required(login_url="/accounts/login/")
 def view_my_profile(request):
-    args={'user':request.user}
+    posts =Post.objects.all().order_by('date')
+    args={'user':request.user, 'posts':posts}
     return render(request,'accounts/my_profile.html',args)
 
 @login_required(login_url="/accounts/login/")
