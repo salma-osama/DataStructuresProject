@@ -38,10 +38,13 @@ def logout_view(request):
     if request.method=='POST':
         logout(request)
         return redirect('home')
-
+    
 @login_required(login_url="/accounts/login/")
-def view_profile(request):
-    user = request.user
+def view_profile(request , pk=None):              
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
     args={'myname':user}
     return render(request,'accounts/profile.html',args)
 
