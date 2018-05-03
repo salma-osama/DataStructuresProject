@@ -14,6 +14,7 @@ url(r'^my_profile/edit/$', views.edit_my_profile, name='edit_my_profile'),
 url(r'^my_profile/password/$', views.edit_my_password, name='edit_my_password'),
 url(r'^change-password/$', views.edit_my_password, name='edit_my_password'),
 url(r'^my_profile/about_me/$',views.view_me, name="about_me"),
+url(r'^profile/(?P<pk>\d+)/$', views.view_profile, name='profile_with_pk'), 
 url(r'^(?P<friend>[\w-]+)/$',views.view_profile, name='profile'),
 url(r'^profile/$', views.view_profile, name='profile'),
 ]
